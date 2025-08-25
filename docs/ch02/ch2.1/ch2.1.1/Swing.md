@@ -3,7 +3,7 @@
 大规模推荐系统需要实时对用户行为做出海量预测，为了保证这种实时性，大规模的推荐系统通常严重依赖于预先计算好的产品索引。产品索引的功能为：给定种子产品返回排序后的候选相关产品列表。
 
 <div align=center>
-<img src="http://ryluo.oss-cn-chengdu.aliyuncs.com/图片2relations.png" alt="在这里插入图片描述" style="zoom:30%;" /> 
+<img src="../../../imgs/ch02/ch2.1/ch2.1.1/Swing/2relations.png" alt="在这里插入图片描述" style="zoom:40%;" /> 
 </div>
 
 相关性产品索引主要包含两部分：替代性产品和互补性产品。例如图中的不同种类的衬衫构成了替代关系，而衬衫和风衣裤子等构成了互补关系。用户通常希望在完成购买行为之前尽可能看更多的衬衫，而用户购买过衬衫之后更希望看到与之搭配的单品而不是其他衬衫了。
@@ -23,7 +23,7 @@ Swing 通过利用 User-Item-User 路径中所包含的信息，考虑 User-Item
 - 什么是内部子结构？
   以经典的啤酒尿布故事为例，张三同时购买了啤酒和尿布，这可能是一种巧合。但两个甚至多个顾客都同时购买了啤酒尿布，这就证明啤酒和尿布具有相关关系。这样共同购买啤酒和尿布的用户越多，啤酒和尿布的相关度就会越高。
   <div align=center>
-  <img src="http://ryluo.oss-cn-chengdu.aliyuncs.com/图片example_of_swing.png" alt="在这里插入图片描述" style="zoom:30%;" /> 
+  <img src="../../../imgs/ch02/ch2.1/ch2.1.1/Swing/example_of_swing.jpeg" alt="在这里插入图片描述" style="zoom:100%;" /> 
   </div>
   图中的红色四边形就是一种Swing子结构，这种子结构可以作为给王五推荐尿布的依据。
 
@@ -251,12 +251,12 @@ Swing 通过利用 User-Item-User 路径中所包含的信息，考虑 User-Item
 
   $\theta_{i,j}=p(c_{i,j}|c_j)=\frac{N(c_{i,j})}{N(c_j)}$
 
-  即，$N(c_{i,j})$为在购买过i之后购买j类的数量，$N(c_{j})$为购买j类的数量。
+  即，$N(c_{i,j})$为在购买过$i$类之后购买$j$类的数量，$N(c_{j})$为购买$j$类的数量。
 
-  由于类别直接的种类差异，每个类别的相关类数量存在差异，因此采用最大相对落点来作为划分阈值。
+  由于类别之间的种类差异，每个类别的相关类数量存在差异，因此采用最大相对落点来作为划分阈值。
 
   <div align=center>
-  <img src="http://ryluo.oss-cn-chengdu.aliyuncs.com/图片max_drop.png" alt="在这里插入图片描述" style="zoom:30%;" /> 
+  <img src="../../../imgs/ch02/ch2.1/ch2.1.1/Swing/max_drop.jpeg" alt="在这里插入图片描述" style="zoom:100%;" /> 
   </div>
 
   例如图(a)中T恤的相关类选择前八个，图(b)中手机的相关类选择前三个。
@@ -268,7 +268,7 @@ Swing 通过利用 User-Item-User 路径中所包含的信息，考虑 User-Item
 
   最终商品层面的互补相关性被定义为：
 
-  $s_{1}(i, j)=\frac{\sum_{u \in U_{i} \cap U_{j}} 1 /\left(1+\left|t_{u i}-t_{u j}\right|\right)}{\left\|U_{i}\right\| \times\left\|U_{j}\right\|}$,其中$j$属于$i$的相关类，且$j$ 的购买时间晚于$i$。
+  $s_{1}(i, j)=\frac{\sum_{u \in U_{i} \cap U_{j}} 1 /\left(1+\left|t_{u i}-t_{u j}\right|\right)}{\left\|U_{i}\right\| \times\left\|U_{j}\right\|}$,其中物品$j$属于物品$i$所属类别的的相关类别，且$j$ 的购买时间晚于$i$。
 
 - 聚类层面
   - 如何聚类？
@@ -277,6 +277,8 @@ Swing 通过利用 User-Item-User 路径中所包含的信息，考虑 User-Item
     Item-item 图，其中又 Swing 计算的排名靠前 item 为邻居，边的权重就是 Swing 分数。
   - 表现如何？
     快速而有效，15分钟即可对数十亿个项目进行聚类。
+  - 设 $L(i)$ 表示商品 $i$ 的聚类标签，则聚类层面的相似度可以表示为：$$ s_2(i,j) = s_1(L(i), L(j)) $$
+
   最终聚类层面的相关度计算同上面商品层面的计算公式
 
 - 线性组合：
